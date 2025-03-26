@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'style1.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.css"
+    crossorigin="anonymous" />
+
+<h2 style="text-align: center; color: white;">Rate "{{ room.name }}"</h2>
+
+<form method="POST" style="margin-top: 30px;">
+    {% csrf_token %}
+    <div class="rating-container">
+        <div class="rating-box">
+            {% for i in "54321" %}
+            {% if rating|stringformat:"s" == i %}
+            <input type="radio" id="rating-{{ i }}" name="score" value="{{ i }}" checked hidden>
+            {% else %}
+            <input type="radio" id="rating-{{ i }}" name="score" value="{{ i }}" hidden>
+            {% endif %}
+            <label for="rating-{{ i }}" class="fas fa-star"></label>
+            {% endfor %}
+
+            <div class="emojis"></div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <button type="submit" class="btn btn--primary">Submit Rating</button>
+        <a href="{% url 'room' room.id %}" class="btn btn--dark">Cancel</a>
+    </div>
+</form>
+{% endblock %}
