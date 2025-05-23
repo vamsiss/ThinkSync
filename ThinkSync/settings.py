@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-x5_zxr-8f_t$9ik)@&cys7fy-!vt_1!^)g25gx1eyue_r2b4_d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -136,3 +136,13 @@ MEDIA_ROOT = BASE_DIR / "static/images"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+import dj_database_url
+
+DATABASES["default"] = dj_database_url.config(default="sqlite:///db.sqlite3")
+
+import os
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_URL = "/static/"
